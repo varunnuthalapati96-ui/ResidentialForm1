@@ -17,13 +17,20 @@ const performanceStandards = [
       "Staff/youth engagement is trauma informed, and considers the youth's racial, cultural, religious, and linguistic needs."
     ],
     references: [
-      "Procedures <a href='https://ilga.gov/commission/jcar/admincode/089/089003010A01000R.html' target='_blank'>301.100</a> Therapeutic Residential Programs Significant Event Reporting and Law Enforcement Involvement",
-      "Procedures <a href='https://ilga.gov/agencies/JCAR/Sections?PartID=08900329&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES' target='_blank'>329</a> Locating and Returning Missing, Runaway and Abducted Children",
-      "Procedures <a href='https://ilga.gov/agencies/JCAR/Sections?PartID=08900331&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES' target='_blank'>331</a> Significant Event Reports",
-      "Rule <a href='https://ilga.gov/agencies/JCAR/Sections?PartID=08900384&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES' target='_blank'>384</a> Behavior Treatment in Residential Child Care Facilities",
-      "Rule <a href='https://ilga.gov/agencies/JCAR/Sections?PartID=08900403&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES' target='_blank'>403</a> Licensing Standards for Group Homes",
-      "Rule <a href='https://ilga.gov/agencies/JCAR/Sections?PartID=08900404&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES' target='_blank'>404</a> Licensing Standards for Child Care Institutions and Maternity Centers"
-    ],
+  'Procedures <a href="https://ilga.gov/commission/jcar/admincode/089/089003010A01000R.html" target="_blank" rel="noopener noreferrer">301.100</a> Therapeutic Residential Programs Significant Event Reporting and Law Enforcement Involvement',
+  'Procedures <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900329&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">329</a> Locating and Returning Missing, Runaway and Abducted Children',
+  'Procedures <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900331&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">331</a> Significant Event Reports',
+  'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900384&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">384</a> Behavior Treatment in Residential Child Care Facilities',
+  'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900403&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">403</a> Licensing Standards for Group Homes',
+  'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900404&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">404</a> Licensing Standards for Child Care Institutions and Maternity Centers',
+  'Program Plan CFS-968',
+  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Section 4.2 Minimum Staffing Expectations',
+  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Section 5.1 Provider Physical Plant',
+  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Section 5.2.7.6 Missing or Abducted Children and Youth in Care and Support Services',
+  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Section 6.0 Treatment Goals/Service Plans',
+  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Section 8.3 Immediate Reporting Requirements'
+],
+
     items: [
       {
         category: "Physical Safety",
@@ -78,158 +85,211 @@ const performanceStandards = [
     ]
   },
   {
-    id: "ps2",
-    title:
-      "<strong>PS2. Living Environment.</strong> A safe living environment is provided with adequate and appropriate food, clothing, and shelter.",
-    expectations: [
-      "Meals are prepared under sanitary conditions and youth are served three balanced meals a day (exceptions include when lunch is served at school).",
-      "Youth have properly fitted and clean clothing that is appropriate for the seasons; essentials for personal care and hygiene are provided.",
-      "Facility is clean, hygienic, in good structural repair and free of hazards where the living space is inviting and homelike.",
-      "The facility has a maintenance program that adequately handles repair, upkeep and replacement."
-    ],
-    references: [
-      "Rule 384 Behavior Treatment in Residential Child Care Facilities",
-      "Rule 403 Licensing Standards for Group Homes",
-      "Rule 404 Licensing Standards for Child Care Institutions and Maternity Centers",
-      "Program Plan CFS-968 Section 5.0 Service Parameters"
-    ],
-    items: [
+  id: "ps2",
+  title:
+  "<strong>PS2. Living Environment.</strong> A safe living environment is provided with adequate and appropriate food, clothing, and shelter.",
+
+  expectations: [
+    " Meals are prepared under sanitary conditions and youth are served three balanced meals a day (exceptions include when lunch is served at school).",
+    " Youth have properly fitted and clean clothing that is appropriate for the seasons; and essentials for maintaining personal care and hygiene are provided; youth clothing is not used for discipline.",
+    " Facility is clean, hygienic, in good structural repair and free of hazards where the living space is inviting and homelike; sleeping rooms are properly furnished.",
+    " The facility has a maintenance program that adequately handles repair, upkeep and replacement of damaged essential items or damage to building."
+  ],
+  referencesIntro:
+    "Relevant Rules and/or Procedures: Rule 404.38 for childcare institutions; Rule 403.14 for group homes.",
+  references: [
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900384&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">384</a> Behavior Treatment in Residential Child Care Facilities',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900403&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">403</a> Licensing Standards for Group Homes',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900404&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">404</a> Licensing Standards for Child Care Institutions and Maternity Centers',
+    "Program Plan CFS-968",
+    "&nbsp;&nbsp;Section 5.0 Service Parameters"
+  ],
+  items: [
+    {
+      category: "Food",
+      description:
+        "Meals and snacks are available at the appropriate times, include a healthy mix of fruits, vegetables, grains, protein, and dairy products, and include alternatives for dietary restrictions or other special circumstances."
+    },
+    {
+      category: "Food",
+      description:
+        "Meals are served under clean and sanitary conditions."
+    },
+    {
+      category: "Food",
+      description:
+        "Menus are followed and posted where youth can view them."
+    },
+    {
+      category: "Clothing",
+      description:
+        "Youth have clean clothes that fit properly and are appropriate for the current season."
+    },
+    {
+      category: "Clothing",
+      description:
+        "Youth have their own clothes, not uniforms, reflecting level systems."
+    },
+    {
+      category: "Clothing",
+      description:
+        "Youth have clothes comparable to what other youth of similar age might wear."
+    },
+    {
+      category: "Shelter",
+      description:
+        "Common areas are in good repair, have enough furniture in good repair, and include other items appropriate for the space's function (e.g., tables, books, games, television, and decorations)."
+    }
+    // If your PDF has additional PS2 items beyond this point,
+    // add them here in the same { category, description } format
+    // using the *exact* wording.
+  ]
+}
+,
       {
-        category: "Food",
-        description:
-          "Meals and snacks are available at appropriate times and include healthy options and alternatives for dietary restrictions."
-      },
-      { category: "Food", description: "Meals are served under clean and sanitary conditions." },
-      { category: "Food", description: "Menus are followed and posted where youth can view them." },
-      {
-        category: "Clothing",
-        description:
-          "Youth have clean clothes that fit properly and are appropriate for the current season."
-      },
-      {
-        category: "Clothing",
-        description: "Youth have their own clothes, not uniforms reflecting level systems."
-      },
-      {
-        category: "Clothing",
-        description:
-          "Youth have clothes comparable to what other youth of similar age might wear."
-      },
-      {
-        category: "Shelter",
-        description:
-          "Common areas are in good repair with adequate furniture and appropriate items for use."
-      }
-    ]
-  },
-  {
     id: "ps3",
-    title:
-      "<strong>PS3. Youth Experience.</strong> Youth experience is assessed as positive by ensuring youth safety, skill building, staff engagement and youth voice.",
+    title: "<strong>PS3. Youth Experience.</strong>",
+    subtitle:
+      "Youth experience is assessed as positive by ensuring youth safety, skill building, staff engagement and youth voice.",
+
+    // Expectations: NO manual "1.", "2.", etc. The UI adds numbers.
     expectations: [
-      "Youth and family are treated with respect; privacy and confidentiality are valued.",
-      "Youth are informed of their rights and grievance procedures.",
-      "Youth receive clear expectations and information about unit rules.",
-      "Communication fosters youth voice and commitment to working through challenges.",
-      "Programming and planning are sensitive to racial, cultural, religious and linguistic needs.",
-      "Youth express positive experiences of safety, skills, and therapeutic interactions."
+      "Youth and family are treated with respect by all levels of staff where their right to personal privacy and confidentiality is valued. They are treated with dignity; staff do not discuss youth and families with other clients or those not professionally working with the youth and families.",
+      "Youth are informed of their rights and grievance procedures; and their voice is incorporated in the treatment planning and overall treatment experience.",
+      "Youth receive clear expectations and information about unit rules (i.e., they know what will be done while living on the unit, who, when, why, and under what circumstances things will be done while living on the unit).",
+      "Communication with youth and families fosters youth voice and commitment to working through challenges; encourage positive relationships with family and others; and creates opportunity to learn and practice new skills.",
+      "Programming, services, and individualized treatment planning are sensitive to youth's racial, cultural, religious and linguistic needs.",
+      "Youth express positive experiences of safety, skill building, and therapeutic interactions with staff."
     ],
+
+    // Relevant Rules and/or Procedures - exactly per PDF
     references: [
-      "Rule 384",
+      'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900384&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">384</a> Behavior Treatment in Residential Child Care Facilities',
       "Administrative Procedures #30 Youth Voice",
-      "Procedures 301, 301.100, 315.112",
-      "Program Plan CFS-968 Sections 5.2.8, 5.2.7"
+      'Procedures <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900301&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">301</a> Placement and Visitation Services',
+      'Procedures <a href="https://ilga.gov/commission/jcar/admincode/089/089003010A01000R.html" target="_blank" rel="noopener noreferrer">301.100</a> Therapeutic Residential Programs',
+      'Procedures <a href="https://dcfs.illinois.gov/content/dam/soi/en/web/dcfs/documents/about-us/policy-rules-and-forms/documents/procedures/procedures-315.pdf" target="_blank" rel="noopener noreferrer">315.112</a> Child and Family Team Meetings – Therapeutic Residential Programs',
+      "Program Plans CFS-968",
+      "&nbsp;&nbsp;&nbsp;&nbsp;Section 5.2.8 Therapeutic Residential (TR) Practice Principles",
+      "&nbsp;&nbsp;&nbsp;&nbsp;Section 5.2.7 Service Array"
     ],
+
+    // Items: NO leading numbers. Use category+description so label is bold only.
     items: [
       {
         category: "Skill Building",
         description:
-          "Youth behavior and feedback suggest they are learning new coping and relationship skills."
+          "Youth behavior and feedback suggest that they are learning new coping and relationship skills."
       },
       {
         category: "Skill Building",
         description:
-          "Youth engage in age and developmentally appropriate therapeutic recreational activities."
+          "Youth behavior and feedback suggest that they are engaging in normal, age and developmentally appropriate therapeutic recreational activities."
       },
       {
-        category: "Staff Engagement",
+        category: "Skill Building",
+        description:
+          "Youth behavior and feedback suggest that they enjoy the therapeutic recreational activities."
+      },
+      {
+        category: "Staff engagement",
         description:
           "Youth behavior and feedback suggest that they are treated with respect."
       },
       {
         category: "Staff Engagement",
         description:
-          "Youth feel staff are supportive and can help them achieve goals."
+          "Youth behavior and feedback suggest that staff are supportive and can help them achieve their goals."
       },
       {
         category: "Staff Engagement",
-        description: "Appropriate boundaries are maintained between staff and youth."
+        description:
+          "Youth behavior and feedback suggest that there are appropriate boundaries between the youth and staff."
       },
       {
         category: "Youth Voice",
         description:
-          "Youth voice is included in treatment, transition, and discharge planning."
+          "Youth voice is included in educational, treatment, transition, and discharge planning decisions, including those participating in decision-making."
       },
       {
         category: "Youth Voice",
         description:
-          "Youth voice is included in day-to-day activity decisions and grievances are addressed."
+          "Youth voice is included in decisions about day-to-day activities."
+      },
+      {
+        category: "Youth Voice",
+        description:
+          "Youth grievances, including about allowances and clothing vouchers, are addressed."
       }
     ]
   },
+
   {
     id: "ps4",
     title:
       "<strong>PS4. Youth and Family Driven Care.</strong> Youth and family driven approaches are utilized where youth are empowered, and family is central.",
-    expectations: [
-      "Youth/family are treated with respect and informed of rights and grievances.",
-      "Assessment and treatment are youth/family centered.",
-      "Communication fosters youth voice and family engagement.",
-      "Services are sensitive to racial, cultural, religious, and linguistic needs.",
-      "CFTMs are used to activate and maintain family participation.",
-      "Family connections are incorporated into programming and visitation."
+     expectations: [
+      " Youth and family are treated with respect by all levels of staff where their right to personal privacy and confidentiality is valued. They are treated with dignity; staff do not discuss youth and families with other clients or those not professionally working with the youth and families.",
+      " Youth/family are informed of their rights and grievance procedures; youth/family centered approach to the assessment and treatment planning and overall treatment experience.",
+      " Communication with youth and families fosters youth voice and commitment to working through challenges; that provides an opportunity to enhance parent-child functioning and interaction; and creates opportunity to learn and practice new skills.",
+      " Programming, services, and individualized treatment planning are sensitive to youth's racial, cultural, religious, and linguistic needs.",
+      " Utilization of the Child and Family Team meetings to activate and maintain family participation and decision making in the process of change and/or service provision; develop strategies to increase youth/family engagement; guide overall care and permanency planning.",
+      " Youth/family connections are valued and incorporated in orientation, programming, therapeutic services, and visitation; active family finding efforts in collaboration with the youth and the CFTM members to develop additional support to achieve stability, stepdown and/or permanency."
     ],
     references: [
-      "Administrative Procedures #30 Youth Voice",
-      "Procedures 301.100, 331",
-      "Rules 384, 403, 404, 431",
-      "Program Plan CFS-968 Sections 1.4, 5.0"
-    ],
+  'Administrative Procedures #30 Youth Voice',
+  'Procedures <a href="https://ilga.gov/commission/jcar/admincode/089/089003010A01000R.html" target="_blank" rel="noopener noreferrer">301.100</a> Therapeutic Residential Programs',
+  'Procedures <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900331&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">331</a> Significant Event Reporting',
+  'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900384&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">384</a> Behavior Treatment in Residential Child Care Facilities',
+  'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900403&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">403</a> Licensing Standards for Group Homes',
+  'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900404&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">404</a> Licensing Standards for Child Care Institutions and Maternity Centers',
+  'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900431&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">431</a> Confidentiality of Personal Information of Persons Served',
+  'Program Plan CFS-968:',
+  '&nbsp;&nbsp;&nbsp;&nbsp;Section 1.4 Brief Description of Services Provided Under This DCFS Agreement',
+  '&nbsp;&nbsp;&nbsp;&nbsp;Section 5.0 Service Parameters'
+]
+,
     items: [
       {
         category: "Youth Guided",
         description:
-          "Youth are involved in decisions about treatment and permanency goals."
+          "Youth are involved in decisions about their treatment and permanency plan goals."
       },
       {
         category: "Youth Guided",
         description:
-          "Youth identities and cultures are respected (gender, language, race/ethnicity, orientation)."
+          "Youth culture, gender identity, language, race/ethnicity, and sexual orientation are respected."
       },
       {
         category: "Family Driven",
         description:
-          "Family connections are considered in treatment and permanency planning."
+          "Youth family connections are considered in their treatment and permanency planning."
       },
       {
         category: "Family Driven",
         description:
-          "There is shared responsibility for CFTM goals."
+          "There is shared responsibility for the CFTM addressing treatment and permanency goals."
+      },
+     
+      {
+        category: "Family Driven",
+        description:
+          "Sibling and family visits are facilitated per the visitation and contract plans."
       },
       {
         category: "Family Driven",
         description:
-          "Sibling/family visits are facilitated per plans."
+          "Activities include agency hosted family focused events/activities (e.g., social events, holiday parties, art shows)."
       },
       {
         category: "Family Driven",
         description:
-          "Agency hosts family-focused events/activities."
+          "Caregivers and families are provided with training and coaching to support reunification and the youth after discharge."
       },
       {
         category: "Family Driven",
         description:
-          "Caregivers/families receive training and coaching."
+          "Caregivers and family culture, gender identity, language, race/ethnicity, and sexual orientation are respected."
       }
     ]
   },
@@ -238,62 +298,97 @@ const performanceStandards = [
     title:
       "<strong>PS5. Staff Training and Education.</strong> Staff are equipped with training, education, and supervision to provide quality services and supports to youth and families.",
     expectations: [
-      "Training program includes pre-service training focusing on trauma.",
-      "Training/consultation provided by individuals with trauma expertise.",
-      "Staff are trained/certified for specialized services per contract.",
-      "Mechanisms exist to maintain compliance with training/certification."
-    ],
-    references: [
-      "Procedures 301.100, 302 (App K & M), 331",
-      "Rules 384, 403, 404, 431",
-      "Program Plan CFS-968 Sections 4.0, 5.0, 5.2.7.7"
-    ],
+  {
+    text: "The contract utilizes a training program that includes:",
+    subpoints: [
+      "Pre-service training that focuses on trauma and the effects of trauma on child development.",
+      "Interventions and strategies to support youth who have been victims of trauma.",
+      "Training and education on how to help youth identify triggers and manage their feelings.",
+      "Early warning signs and precursors of distress that can signal upset or an impending crisis.",
+      "Importance of therapeutic relationships and boundaries within their specific roles.",
+      "Ongoing education and training in cultural competence is provided to all levels of staff.",
+      "Training in youth guided practices."
+    ]
+  },
+  "Training and consultation are provided by individuals within the agency or consultants who have expertise in trauma.",
+  "There are staff trained and/or certified to provide specialized services as identified in their contract.",
+  "There is a mechanism/process for the contract to maintain staff compliance with trainings and certification requirements (i.e. annual trainings, re-certification process, etc.); and identification of the need for new trainings, timeframes for refresher training, additional training for staff needing remediation."
+],
+
+   references: [
+    'Procedures <a href="https://ilga.gov/commission/jcar/admincode/089/089003010A01000R.html" target="_blank" rel="noopener noreferrer">301.100</a> Therapeutic Residential Programs',
+    'Procedures 302 Appendix K Support and Well-Being of Lesbian, Gay, Bisexual, Transgender, questioning/Queer, Intersex, and Asexual (LGBTQIA+) Children and Youth',
+    'Procedures 302 Appendix M Transition Planning for Adolescents',
+    'Procedures <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900331&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">331</a> Significant Event Reporting',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900384&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">384</a> Behavior Treatment in Residential Child Care Facilities',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900403&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">403</a> Licensing Standards for Group Homes',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900404&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">404</a> Licensing Standards for Child Care Institutions and Maternity Centers',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900431&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">431</a> Confidentiality of Personal Information of Persons Served',
+    "Program Plan CFS-968",
+    "&nbsp;&nbsp;o Section 4.0 Program Staff",
+    "&nbsp;&nbsp;o Section 5.0 Service Parameters",
+    "&nbsp;&nbsp;o Section 5.2.7.7 Meaningful Family Engagement and Involvement"
+  ],
     items: [
       {
         description:
-          "Training curriculum addresses trauma and effects on child development."
+          "The training curriculum addresses trauma and the effects of trauma on child development per the trauma treatment model and behavior management program."
       },
       {
         description:
-          "All staff receive ongoing education in trauma model and behavior management."
+          "Staff at all levels of the organization are provided with ongoing education and training in the trauma treatment model and behavior management program."
       },
-      { description: "Staff trained on youth-guided and culturally competent practices." },
+      { description: "Staff are trained on youth-guided practices, including cultural competence and humility training." },
       {
         description:
-          "Training records identify who is trained, due, or needs remedial training."
+          "Training records identify staff who have been trained, need to be trained, or require remedial training in the trauma treatment and behavior management models."
       },
-      { description: "Weekly multidisciplinary treatment team meetings occur." },
+      { description: "Weekly multidisciplinary treatment team meetings are convened." },
       {
         description:
-          "Staff receive regular individual/group supervision."
+          "Staff regularly meet with their supervisors for individual/group supervision."
       },
       {
         description:
-          "Staff debrief stress reactions with supervisors."
+          "Staff regularly debrief with their supervisor about their stress reactions and how stress impacts their work."
       }
     ]
   },
   {
-    id: "ps6",
-    title:
-      "<strong>PS6. Milieu Operations and Programming.</strong> There is a therapeutic environment that ensures safety, operational efficiency, and effective programming.",
-    expectations: [
-      "Effective collaboration/communication between professional and direct care staff.",
-      "Staff actively and therapeutically engage youth.",
-      "A skilled staff member leads each shift.",
-      "Minimum staff/youth ratios maintained.",
-      "Discipline aligns with Rule 384.",
-      "Operations are structured, consistent, predictable.",
-      "Reasonable and Prudent Parent Standard used.",
-      "Plans exist for unexpected circumstances.",
-      "Trauma informed practice evident in milieu.",
-      "Programming supports engagement and treatment progress."
-    ],
-    references: [
-      "Procedures 301.100, 302 App K, 315.135, 331",
-      "Rules 384, 403, 404, 431",
-      "Program Plan CFS-968 Sections 4.0, 4.2, 5.0, 5.2.8, 5.2.7.7"
-    ],
+  id: "ps6",
+  title:
+    "<strong>PS6. Milieu Operations and Programming.</strong> There is a therapeutic environment that ensures safety, operational efficiency, and effective programming.",
+  expectations: [
+    "There is ongoing and effective collaboration and communication between professional (e.g., therapists, case managers, psychiatrist) and direct care staff; there are regular meetings that include discussions of youth behaviors; and adequate shift-change communication about youth, incidents and other issues pertaining to program functioning and safety occur between direct care staff.",
+    "Staff members are actively and therapeutically engagement with youth; staff implement milieu routines and planful activities that support safety, structure, and stability of the unit.",
+    "A skilled staff member is designated as the lead for each shift.",
+    "Minimum required staff/youth ratios maintained; and staff members have capacity to adjust based on changes in clinical acuity.",
+    "Discipline is provided in accordance with Rule 384; does not include threats/intimidation or physical repercussions to behavior; or is punitive in nature.",
+    "Milieu operations are structured, consistent and predictable to provide a balance of therapeutic, recreational, and educational activities, promoting skill development, social interaction, and emotional wellbeing.",
+    "The program utilizes the Reasonable and Prudent Parental Standard and \"normalcy parenting\" standards when determining youth's participation in extracurricular, enrichment, cultural and social activities offered by the child's school, family of origin and/or in the community.",
+    "Plans are in place to address the potential for unexpected circumstances (i.e. schedule changes, staff absence) that may arise in milieu operations.",
+    "Elements/principles of trauma informed practice are evident in milieu operations.",
+    "The program schedule provides programming to engage youth and support treatment progress; milieu staff are familiar with individual youth treatment goals and Behavior Treatment Plans; youth education plan or vocational programs are implemented; milieu staff support youth in completing school or vocational activities; Parallel programming is provided as needed to support the individualized needs of youth; milieu staff provide effective, goal-oriented, skill building and community groups according to the established schedule."
+  ],
+    
+
+  references: [
+    "<strong>Relevant Rules and/or Procedures:</strong>",
+    'Procedures <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900301&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">301.100</a> Therapeutic Residential Programs',
+    'Procedures <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900302&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">302</a>. Appendix K Support and Well-Being of Lesbian, Gay, Bisexual, Transgender, questioning/Queer, Intersex, and Asexual (LGBTQIA+) Children and Youth',
+    "Procedures 315.135 Other Required Casework Activities/ Reasonable and Prudent Parent Standard",
+    'Procedures <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900331&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">331</a> Significant Event Reporting',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900384&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">384</a> Behavior Treatment in Residential Child Care Facilities',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900403&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">403</a> Licensing Standards for Group Homes',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900404&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">404</a> Licensing Standards for Child Care Institutions and Maternity Centers',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900431&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">431</a> Confidentiality of Personal Information of Persons Served',
+    "Program Plans CFS-968",
+    "&nbsp;&nbsp;&nbsp;Section 4.0 Program Staff",
+    "&nbsp;&nbsp;&nbsp;Section 4.2 Minimum Staffing Expectation",
+    "&nbsp;&nbsp;&nbsp;Section 5.0 Service Parameters",
+    "&nbsp;&nbsp;&nbsp;Section 5.2.8 Therapeutic Residential (TR) Practice Principles",
+    "&nbsp;&nbsp;&nbsp;Section 5.2.7.7 Meaningful Family Engagement and Involvement"
+  ],
     items: [
       {
         category: "Operations",
@@ -303,91 +398,96 @@ const performanceStandards = [
       {
         category: "Operations",
         description:
-          "Regular multidisciplinary meetings discuss youth behavior."
+          "Regular meetings are scheduled to discuss youth behavior, including direct care staff from all shifts, case managers, therapists, and psychiatrists."
       },
       {
         category: "Operations",
         description:
-          "Staff-to-youth ratio is maintained and adjusted for clinical acuity."
+          "The minimum required staff-to-youth ratio is maintained, and there is a capacity to adjust based on changes in youth clinical acuity."
       },
       {
         category: "Programming",
         description:
-          "Milieu is structured, consistent, predictable."
+          "The milieu is structured, consistent, and predictable."
       },
       {
         category: "Programming",
         description:
-          "Trauma-informed practice integrated into operations."
+          "The milieu incorporates trauma-informed practice into milieu operations."
       },
       {
         category: "Programming",
         description:
-          "Structured programming on weekdays, weekends, and non-school days."
+          "There is structured programming during weekdays and weekends, including days when school is not in session."
       },
       {
         category: "Programming",
         description:
-          "Goal-oriented skill-building groups and activities provided."
+          "According to the established schedule, the milieu provides goal-oriented, skill-building community groups and therapeutic recreation."
       },
       {
         category: "Programming",
         description:
-          "Sensory/expressive therapies integrated."
+          "The milieu integrates sensory integration/modulation activities and expressive therapies."
       },
       {
         category: "Programming",
         description:
-          "Respect for race/ethnicity, culture, orientation, and gender identity evident."
+          "The milieu demonstrates awareness of and respect for race/ethnicity, culture, sexual orientation, and gender identity."
       }
     ]
   },
   {
     id: "ps7",
     title:
-      "<strong>PS7. Clinical Programs.</strong> Prescribed clinical services are provided by qualified staff.",
+      "<strong>PS7. Clinical Programs.</strong> Prescribed clinical services are provided by staff that holds the relevant degrees, licensures, and certifications.",
     expectations: [
-      "Adequate clinical services array (individual, group, family).",
-      "Psychiatric services consistent and compliant.",
-      "Sensory/expressive therapies incorporated as needed.",
-      "Treatment plans are individualized, strengths-based, goal-oriented."
+      "An adequate array of clinical services is provided including individual, group and family counseling or therapy as well as non-traditional therapies (music, art, drama, etc.).",
+      "Psychiatric services are consistently provided and compliant with DCFS rules regarding prescription and administration of psychotropic medications.",
+      "Sensory integration/modulation activities (i.e. yoga, exercise, other physical activities) and expressive therapies (e.g. art, music) are incorporated into treatment modalities.",
+      "Treatment plans are individualized, problem-oriented, and consider the youth's strengths and goals. The program ensures that treatment plans include goals based on the youth's preferences and are written in language that is easy to understand."
     ],
-    references: [
-      "Procedures 301.100",
-      "Rule 325 Psychotropic Medications",
-      "Rules 384, 403, 404",
-      "Program Plan CFS-968 Sections 1.4, 4.0, 5.0"
-    ],
+  references: [
+    'Procedures <a href="https://ilga.gov/commission/jcar/admincode/089/089003010A01000R.html" target="_blank" rel="noopener noreferrer">301.100</a> Therapeutic Residential Programs',
+    'Rule 325 Administration of Psychotropic Medications to Children for Whom the Department of Children and Family Services is Legally Responsible',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900384&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">384</a> Behavior Treatment in Residential Child Care Facilities',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900403&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">403</a> Licensing Standards for Group Homes',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900404&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">404</a> Licensing Standards for Child Care Institutions and Maternity Centers',
+    "Program Plans CFS-968",
+    "&nbsp;&nbsp;Section 1.4 Brief Description of Services Provided Under This DCFS Agreement",
+    "&nbsp;&nbsp;Section 4.0 Program Staff",
+    "&nbsp;&nbsp;Section 5.0 Service Parameters"
+  ],
     items: [
       {
         category: "Elements",
         description:
-          "Youth receive therapy services as outlined in treatment plans."
+          "Youth receive the individual, group, and family therapy outlined in their individual treatment plans."
       },
       {
         category: "Elements",
         description:
-          "Alternatives to talk therapy (ABA, art, music, etc.) available where indicated."
+          "Alternatives to talk therapy, such as ABA, music, art, and animal-assisted therapy are available when outlined in individual treatment plans."
       },
       {
         category: "Elements",
         description:
-          "Psychiatry services provided as outlined."
+          "Youth receive the psychiatry services outlined in their individual treatment plans."
       },
       {
         category: "Credentials",
         description:
-          "Therapy provided/supervised by appropriately credentialed staff."
+          "Individual, group, and family therapy is provided or supervised by a trained and/or credentialed therapist."
       },
       {
         category: "Credentials",
         description:
-          "Alternative therapies led by experienced practitioners."
+          "Alternatives to talk therapy are provided or supervised by experienced therapists (credentials for these modalities do not always exist)."
       },
       {
         category: "Credentials",
         description:
-          "Psychotropic meds prescribed/monitored by licensed staff."
+          "Psychotropic medications are prescribed and monitored by appropriately licensed staff."
       }
     ]
   },
@@ -396,80 +496,131 @@ const performanceStandards = [
     title:
       "<strong>PS8. Management.</strong> Leadership and management practices demonstrate effective communication, governance, and operational management.",
     expectations: [
-      "Mechanisms support communication and consistency among staff.",
-      "Leadership can recruit/retain qualified staff.",
-      "Leadership solicits and considers input from youth and staff.",
+      "Adequate mechanisms exist to facilitate good communication, cooperation and consistency among staff members in implementing treatment plans, providing consistency of care, and maintaining youth and staff safety.",
+      "Leadership has the capacity to recruit and retain qualified professional and direct care staff. Turnover in administration, professional or direct service staff is not unusually high. There are adequate numbers of appropriately trained staff to meet program purpose and functions.",
+      "Leadership solicits and considers input from youth and staff; and implements governance systems to address internal/external feedback.",
       "Program is managed by stable leadership team.",
-      "High-risk situations reported with transparency.",
+      "High risk situations or potential for high-risk situations are reported and there is transparency with information concerning youth in care.",
       "Responses to monitoring concerns are timely and adequate.",
-      "Leadership hierarchy and roles are clearly defined.",
+      "There is a clearly defined leadership hierarchy with well-defined roles.",
       "Executive management supports residential leaders.",
-      "Strong clinical leadership integrated program-wide.",
-      "Administrative systems are dependable."
+      "There is strong clinical leadership that is integrated into all aspects of the program; opportunities for youth to prepare for successful discharge to a less restrictive setting (e.g., interaction with peers and adults, conflict resolution, skill building); and reinforcement of shared responsibility in collaboration with case management teams.",
+      "Administrative systems are dependable and consistent to assure development, review, and implementation of Agency Behavior Treatment Plan, and timely provision of thorough documentation of therapeutic services."
     ],
     references: [
-      "Rules 384, 403, 404",
-      "Program Plan CFS-968 Sections 3.0, 8.0, 9.0"
-    ],
+  'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900384&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">384</a> Behavior Treatment in Residential Child Care Facilities',
+  'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900403&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">403</a> Licensing Standards for Group Homes',
+  'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900404&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">404</a> Licensing Standards for Child Care Institutions and Maternity Centers',
+  'Program Plan CFS-968:',
+  '&nbsp;&nbsp;&nbsp;&nbsp;Section 3.0 Certifications',
+  '&nbsp;&nbsp;&nbsp;&nbsp;Section 8.0 Client and Program Reporting',
+  '&nbsp;&nbsp;&nbsp;&nbsp;Section 9.0 Fiscal and Program Monitoring'
+]
+,
     items: [
-      "Communication: Effective communication systems among staff.",
-      "Communication: Youth/family/CFTM input is solicited and considered.",
-      "Communication: High-risk situations reported transparently.",
-      "Leadership: Clear hierarchy and roles.",
-      "Leadership: Executive management supports residential/clinical leaders.",
-      "Leadership: Clinical leadership integrated.",
-      "Management: Qualified staff are retained; turnover not excessive.",
-      "Management: Policies and plans are regularly reviewed.",
-      "Management: Governance includes board/advisory involvement."
-    ]
+  {
+    category: "Communication",
+    description:
+      "Adequate mechanisms are in place to facilitate effective communication, cooperation, and consistency among staff implementing treatment plans, providing care, and maintaining youth and staff safety."
   },
   {
-    id: "ps9",
-    title:
-      "<strong>PS9. Quality Improvement Processes.</strong> A QI process with administrative systems and culture of improvement is implemented and maintained.",
-    expectations: [
-      "Environment supports continuous quality improvement.",
-      "QI plan addresses Performance Standards.",
-      "QI data shared with staff and leadership.",
-      "Staff aware of Performance Standards.",
-      "Improvement activities exist for key areas.",
-      "QI Plan implemented, reviewed, updated.",
-      "Post-discharge outcomes monitored."
-    ],
-    references: [
-      "Procedures 301.100, 331",
-      "Rules 384, 403, 404",
-      "Program Plan CFS-968 Sections 2.0, 3.0, 8.0, 9.0"
-    ],
+    category: "Communication",
+    description:
+      "Input from youth, their families, and child and family teams is solicited and considered."
+  },
+  {
+    category: "Communication",
+    description:
+      "High-risk or potentially high-risk situations are routinely and transparently reported to the Department (e.g., licensing, monitoring, caseworker, depending on what's appropriate)."
+  },
+  {
+    category: "Leadership",
+    description:
+      "There are clearly defined leadership hierarchy and roles."
+  },
+  {
+    category: "Leadership",
+    description:
+      "Executive management supports and guides its residential and clinical leaders with trauma informed practices."
+  },
+  {
+    category: "Leadership",
+    description:
+      "Clinical leadership is integrated into all aspects of the program."
+  },
+  {
+    category: "Management",
+    description:
+      "Qualified administrative, professional, and direct care staff are retained (e.g., turnover is not unusually high)."
+  },
+  {
+    category: "Management",
+    description:
+      "Agency behavior treatment plans and other policies are regularly reviewed."
+  },
+  {
+    category: "Management",
+    description:
+      "Internal governance includes involvement from the board of directors (or other advisory group)."
+  }
+]
+
+  },
+  {
+  id: "ps9",
+  title:
+    "<strong>PS9. Quality Improvement Processes.</strong> A QI process that includes administrative systems and fosters a culture of improvement has been implemented and maintained.",
+  expectations: [
+    "Program has an environment/culture that supports continuous quality improvement.",
+    "QI plan addresses Performance Standards as outlined by the Provider and the Department; includes compliance with mandated reporting and significant event reports; and Department rule/procedures including Procedures 301.100 Therapeutic Residential Programs.",
+    "Data collected for the QI plan are shared with direct care and residential program leadership and contribute to leadership decisions about the program.",
+    "Staff demonstrate awareness of the Performance Standards, and other areas of improvement as identified in the QI plan.",
+    "There are improvement activities for Performance Standards; other identified areas of improvement to improve quality of services; and/or areas that require corrective action. Improvements are continuously occurring/evolving and are sustained.",
+    "The Quality Improvement Plan is implemented, reviewed and modified as needed.",
+    "Post discharge treatment outcomes for youth are monitored and included."
+  ],
+  references: [
+    'Procedures <a href="https://ilga.gov/commission/jcar/admincode/089/089003010A01000R.html" target="_blank" rel="noopener noreferrer">301.100</a> Therapeutic Residential Programs',
+    'Procedures <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900331&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">331</a> Significant Event Reporting',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900384&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">384</a> Behavior Treatment in Residential Child Care Facilities',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900403&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">403</a> Licensing Standards for Group Homes',
+    'Rule <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900404&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">404</a> Licensing Standards for Child Care Institutions and Maternity Centers',
+    "Program Plans CFS-968",
+    "&nbsp;&nbsp;o Section 2.0 General Delivery of Required Services",
+    "&nbsp;&nbsp;o Section 3.0 Certifications",
+    "&nbsp;&nbsp;o Section 8.0 Client and Program Reporting",
+    "&nbsp;&nbsp;o Section 9.0 Fiscal and Program Monitoring"
+  ],
     items: [
       {
         category: "Administrative systems",
-        description: "Compliance with mandated reporting."
+        description: "There is compliance with mandated reporting responsibilities."
       },
+      {
+  category: "Administrative systems",
+  description:
+    'SERs are comprehensive, accurately completed, and submitted promptly per Procedures <a href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900331&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES" target="_blank" rel="noopener noreferrer">331</a>.'
+},
+
       {
         category: "Administrative systems",
         description:
-          "SERs are comprehensive, accurate, and timely."
-      },
-      {
-        category: "Administrative systems",
-        description:
-          "Policies and procedures implemented with sustained progress."
+    'Procedures <a href="https://ilga.gov/commission/jcar/admincode/089/089003010A01000R.html" target="_blank" rel="noopener noreferrer">301.100</a>, including QRTP requirements, are followed, and other relevant department policies and procedures are implemented with sustained progress.'
       },
       {
         category: "Culture of improvement",
         description:
-          "QI plan addresses key performance/improvement areas."
+          "The QI plan addresses previously identified key performance areas or desired growth/development areas."
       },
       {
         category: "Culture of improvement",
         description:
-          "QI activities implemented with sustained progress."
+          "The QI activities in key performance standard areas are implemented with sustained progress"
       },
       {
         category: "Culture of improvement",
         description:
-          "Post-discharge outcomes are evaluated."
+          "The QI plan evaluates the implementation and effectiveness of post-discharge services."
       }
     ]
   }
@@ -481,6 +632,7 @@ function App() {
   const [formData, setFormData] = useState({});
   const [scoreErrors, setScoreErrors] = useState({});
   const [dateError, setDateError] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const updateField = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -563,12 +715,54 @@ function App() {
     return Math.round(total / count);
   };
 
-  // Scenario 2 (Next Step / QIP logic) is on hold.
-// If/when it’s reinstated, reintroduce shouldShowNextStep here
-// and re-enable the QIP banner markup in the assessment items.
-
-
   const getCharCount = (name) => (formData[name] || "").length;
+
+  // Get the highest severity score for a performance standard (higher number = higher severity)
+  const getDomainSeverity = (psId) => {
+    let highestScore = null; // Higher score = higher severity
+
+    Object.entries(formData).forEach(([key, val]) => {
+      if (key.startsWith(`${psId}_item`) && key.endsWith('_score') && val !== "") {
+        const num = Number(val);
+        if (!Number.isNaN(num) && num >= 1 && num <= 4) {
+          if (highestScore === null || num > highestScore) {
+            highestScore = num;
+          }
+        }
+      }
+    });
+
+    return highestScore;
+  };
+
+  // Get color class based on severity score
+  const getDomainColorClass = (psId) => {
+    const severity = getDomainSeverity(psId);
+    
+    console.log(`PS: ${psId}, Severity: ${severity}`); // Debug log
+    
+    if (severity === null) return 'domain-default'; // No scores yet
+    if (severity >= 3) return 'domain-red';          // Highest severity (3 or 4)
+    if (severity === 2) return 'domain-yellow';      // Medium severity
+    return 'domain-green';                           // Low severity (1)
+  };
+
+  // Get severity badge text and class
+  const getSeverityBadge = (psId) => {
+    const severity = getDomainSeverity(psId);
+    
+    if (severity === null) return null;
+    if (severity >= 3) return { text: 'HIGH SEVERITY - Score: 3+', class: 'badge-red' };
+    if (severity === 2) return { text: 'MEDIUM SEVERITY - Score: 2', class: 'badge-yellow' };
+    return { text: 'LOW SEVERITY - Score: 1', class: 'badge-green' };
+  };
+
+  const handleSaveAsDraft = () => {
+    console.log("Saved as Draft:", formData);
+    alert("Assessment saved as draft successfully!");
+    // Here you would typically save to a database or local storage
+    // You could also close the form or redirect the user
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -584,11 +778,41 @@ function App() {
     }
 
     console.log("Assessment Data:", formData);
-    alert("Assessment submitted! Check console for full data.");
+    // Show success screen
+    setIsSubmitted(true);
+    // Scroll to top to show the success message
+    window.scrollTo(0, 0);
+  };
+
+  const handleReturnToDashboard = () => {
+    // TODO: Later implement navigation to dashboard
+    console.log("Returning to dashboard...");
+    // For now, just reset the form
+    // When you have routing set up, you would navigate here
+    // Example: navigate('/dashboard') or window.location.href = '/dashboard'
   };
 
   return (
     <div className="container">
+      {isSubmitted ? (
+        // Success Screen
+        <div className="success-screen">
+          <div className="success-icon">✓</div>
+          <h1 className="success-title">Thank You!</h1>
+          <p className="success-message">Successfully Saved</p>
+          <p className="success-submessage">
+            Your Performance Standard Report has been submitted successfully.
+          </p>
+          <button 
+            className="btn-dashboard" 
+            onClick={handleReturnToDashboard}
+          >
+            Return to Dashboard
+          </button>
+        </div>
+      ) : (
+        // Original Form
+        <>
       {/* Header */}
       <div className="header">
         <div className="header-left">
@@ -857,16 +1081,16 @@ function App() {
           score using a 4-point Likert scale:
           <ul>
             <li>
-              <strong>1</strong> = Does Not Meet Standard
+              <strong>1</strong> = Full Implementation / Outstanding
             </li>
             <li>
-              <strong>2</strong> = Partially Meets Standard
+              <strong>2</strong> = Substantial Implementation / Good
             </li>
             <li>
-              <strong>3</strong> = Meets Standard
+              <strong>3</strong> = Partial Implementation / Concerning
             </li>
             <li>
-              <strong>4</strong> = Exceeds Standard
+              <strong>4</strong> = Unsatisfactory Implementation / Unsatisfactory
             </li>
           </ul>
         </div>
@@ -882,23 +1106,109 @@ function App() {
                 dangerouslySetInnerHTML={{ __html: ps.title }}
               />
 
-              <div className="expectations-box">
-                <h4>Expectations:</h4>
-                <ol>
-                  {ps.expectations.map((exp, i) => (
-                    <li key={i}>{exp}</li>
-                  ))}
-                </ol>
-              </div>
+             {/* Expectations */}
+<div className="expectations">
+  <h4><strong>Expectations:</strong></h4>
+  <ol>
+    {(ps.expectations || []).map((exp, idx) => {
+      // CASE 1: Simple string line
+      if (typeof exp === "string") {
+        const match = exp.match(/^(\d+(\.\d+)*)\.\s*(.*)$/);
+        if (!match) {
+          return <li key={idx}>{exp}</li>;
+        }
+        const [, num, , rest] = match;
+        return (
+          <li key={idx}>
+            <strong>{num}.</strong> {rest}
+          </li>
+        );
+      }
+
+      // CASE 2: Object with { text, subpoints }
+      if (exp && typeof exp === "object") {
+        const parentText = exp.text || "";
+        const pm = parentText.match(/^(\d+(\.\d+)*)\.\s*(.*)$/);
+
+        return (
+          <li key={idx}>
+            {pm ? (
+              <>
+                <strong>{pm[1]}.</strong> {pm[3]}
+              </>
+            ) : (
+              parentText
+            )}
+
+            {Array.isArray(exp.subpoints) && exp.subpoints.length > 0 && (
+              <ol className="subpoints">
+                {exp.subpoints.map((sp, sIdx) => {
+                  const spText = String(sp);
+                  const sm = spText.match(/^(\d+(\.\d+)*)\.\s*(.*)$/);
+                  return (
+                    <li key={sIdx}>
+                      {sm ? (
+                        <>
+                          <strong>{sm[1]}.</strong> {sm[3]}
+                        </>
+                      ) : (
+                        spText
+                      )}
+                    </li>
+                  );
+                })}
+              </ol>
+            )}
+          </li>
+        );
+      }
+
+      // Fallback: ignore anything unexpected
+      return null;
+    })}
+  </ol>
+</div>
+
+{ps.id === "ps2" && (
+  <p className="inline-rules">
+    <strong>Relevant Rules and/or Procedures:</strong>
+    &nbsp;Rule{" "}
+    <a
+      href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900404&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      404.38
+    </a>{" "}
+    for childcare institutions; Rule{" "}
+    <a
+      href="https://ilga.gov/agencies/JCAR/Sections?PartID=08900403&TitleDescription=TITLE%2089:%20%20SOCIAL%20SERVICES"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      403.14
+    </a>{" "}
+    for group homes.
+  </p>
+)}
+
 
               <div className="references-box">
-                <strong>Relevant Rules and/or Procedures:</strong>
-                <ul>
-                  {ps.references.map((ref, i) => (
-                    <li key={i} dangerouslySetInnerHTML={{ __html: ref }} />
-                  ))}
-                </ul>
-              </div>
+  <strong>Relevant Rules and/or Procedures:</strong>
+  <ul className="references-list">
+    {ps.references.map((ref, idx) => {
+      const isSubItem = ref.includes('Section');
+      return (
+        <li
+          key={idx}
+          className={isSubItem ? 'sub-item' : 'main-item'}
+          dangerouslySetInnerHTML={{ __html: ref }}
+        />
+      );
+    })}
+  </ul>
+</div>
+
 
               {ps.items.map((item, index) => {
                 const itemNum = index + 1;
@@ -906,19 +1216,26 @@ function App() {
                 const commentName = `${ps.id}_item${itemNum}_comment`;
                 const rebuttalName = `${ps.id}_item${itemNum}_rebuttal`;
 
-                const text =
-                  typeof item === "string"
-                    ? item
-                    : item.category
-                    ? `<strong>${item.category}:</strong> ${item.description}`
-                    : item.description;
+                  const text =
+    // Case 1: item is a plain string (most of your questions)
+    typeof item === "string"
+      ? item
+      // Case 2: item has a `label` field with the full exact text from the PDF
+      : item.label
+      ? item.label
+      // Case 3: legacy shape with category + description
+      : item.category
+      ? `<strong>${item.category}:</strong> ${item.description}`
+      // Fallback so we never show "undefined"
+      : item.description || "";
 
                 return (
                   <div className="assessment-item" key={itemNum}>
                     <div
                       className="item-number"
                       dangerouslySetInnerHTML={{
-                        __html: `<strong>${itemNum}.</strong> ${text}`
+                        __html: `<strong>${itemNum}.</strong> ${text.replace(/^\d+\.\s*/, "")}`
+
                       }}
                     />
 
@@ -942,21 +1259,6 @@ function App() {
                         </span>
                       )}
                     </div>
-
-                    {/* Scenario 2 (Next Step / QIP banner) is on hold.
-                        Keeping markup commented so it can be re-enabled later. */}
-                    {/*
-                    <div
-                      className={
-                        "next-step-alert" +
-                        (shouldShowNextStep(ps.id, scoreName)
-                          ? " show"
-                          : "")
-                      }
-                    >
-                      Request Quality Improvement Plan (QIP)
-                    </div>
-                    */}
 
                     <div className="text-field">
                       <label>Comment:</label>
@@ -994,13 +1296,20 @@ function App() {
               })}
 
               {/* Overall PS Comment */}
-              <div className="overall-comment-section">
-                <h3>Overall Performance Standard Comment</h3>
+              <div className={`overall-comment-section ${getDomainColorClass(ps.id)}`}>
+                <h3>
+                  Overall Performance Standard Comment
+                  {getSeverityBadge(ps.id) && (
+                    <span className={`severity-badge ${getSeverityBadge(ps.id).class}`}>
+                      {getSeverityBadge(ps.id).text}
+                    </span>
+                  )}
+                </h3>
 
                 <div className="text-field">
                   <label className="required">Situation:</label>
                   <div className="instruction">
-                    *Briefly describe the current situation or issue.
+                    *Briefly describe the current situation or issue that needs to be addressed
                   </div>
                   <textarea
                     name={`${ps.id}_situation`}
@@ -1020,7 +1329,7 @@ function App() {
                 <div className="text-field">
                   <label className="required">Background:</label>
                   <div className="instruction">
-                    *Provide relevant context and prior actions.
+                    *Clearly provide relevant background information that provides context for the situation, including any important details or previous actions taken
                   </div>
                   <textarea
                     name={`${ps.id}_background`}
@@ -1040,7 +1349,7 @@ function App() {
                 <div className="text-field">
                   <label className="required">Assessment:</label>
                   <div className="instruction">
-                    *Summarize professional analysis/implications.
+                    *State one's professional analysis and/or interpretation of the situation noting the potential impact and/or implications
                   </div>
                   <textarea
                     name={`${ps.id}_assessment`}
@@ -1060,7 +1369,7 @@ function App() {
                 <div className="text-field">
                   <label className="required">Recommendation:</label>
                   <div className="instruction">
-                    *Proposed course of action based on assessment.
+                    *Note the proposal course of action and/or solution to address the situation based off the assessment
                   </div>
                   <textarea
                     name={`${ps.id}_recommendation`}
@@ -1081,13 +1390,22 @@ function App() {
           ))}
         </div>
 
-        {/* Submit */}
+        {/* Submit Section with Two Buttons */}
         <div className="submit-section">
+          <button 
+            type="button" 
+            className="btn-draft"
+            onClick={handleSaveAsDraft}
+          >
+            Save as Draft and Close
+          </button>
           <button type="submit" className="btn-submit">
-            Submit Assessment
+            Submit
           </button>
         </div>
       </form>
+      </>
+      )}
     </div>
   );
 }
