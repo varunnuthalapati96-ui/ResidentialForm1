@@ -697,6 +697,11 @@ function App() {
     updateField(name, value);
   };
 
+  // Prevent mouse wheel from changing number input values
+  const handleScoreWheel = (e) => {
+    e.target.blur(); // Remove focus from the input to prevent scroll change
+  };
+
   const getSummaryScore = (psId) => {
     let total = 0;
     let count = 0;
@@ -1251,6 +1256,7 @@ function App() {
                         max="4"
                         value={formData[scoreName] || ""}
                         onChange={handleScoreChange}
+                        onWheel={handleScoreWheel}
                         required
                       />
                       {scoreErrors[scoreName] && (
