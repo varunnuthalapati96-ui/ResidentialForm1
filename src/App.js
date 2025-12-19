@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState, useEffect } from "react";
+import "./Residentialform.css";
 
 const performanceStandards = [
   {
@@ -628,17 +628,181 @@ const performanceStandards = [
 
 const stripTags = (html) => html.replace(/<[^>]*>/g, "");
 
-function App() {
-  const [formData, setFormData] = useState({});
+function App({ onClose, onSave, draftData }) {
+  // ✅ MERGED: Get current date function from current code
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  // ✅ MERGED: Initialize with current date
+  const [formData, setFormData] = useState({ date: getCurrentDate() });
   const [scoreErrors, setScoreErrors] = useState({});
   const [dateError, setDateError] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isViewOnly, setIsViewOnly] = useState(false); // For completed forms opened from dashboard
+  const [showSuccessScreen, setShowSuccessScreen] = useState(false); // Only show success screen immediately after submission
+  const [hasAnsweredQuestion, setHasAnsweredQuestion] = useState(false);
+  
+  // Generate Assessment ID immediately when form opens
+  const generateResiId = () => {
+    const stored = localStorage.getItem('assessments');
+    const assessments = stored ? JSON.parse(stored) : [];
+    const resiAssessments = assessments.filter(a => a.type === 'Residential');
+    const maxId = resiAssessments.reduce((max, assessment) => {
+      const match = assessment.id.match(/Resi-(\d+)/);
+      if (match) {
+        const num = parseInt(match[1]);
+        return num > max ? num : max;
+      }
+      return max;
+    }, 0);
+    return `Resi-${String(maxId + 1).padStart(3, '0')}`;
+  };
+  
+  const [assessmentId] = useState(() => draftData?.id || generateResiId());
+
+  // Load draft data when component mounts
+  useEffect(() => {
+    if (draftData) {
+      // Handle different data structures
+      let loadedData = null;
+      
+      if (draftData.data && draftData.data.data) {
+        // Data is nested (from dashboard storage)
+        loadedData = draftData.data.data;
+      } else if (draftData.data) {
+        // Data is directly under .data
+        loadedData = draftData.data;
+      } else {
+        // Data might be at root level
+        loadedData = draftData;
+      }
+      
+      if (loadedData && typeof loadedData === 'object') {
+        // ✅ MERGED: Preserve current date if loading draft
+        setFormData({ date: getCurrentDate(), ...loadedData });
+        
+        // Check if this is a completed form (view-only mode)
+        if (draftData.status === 'Completed' || draftData.status === 'Complete') {
+          console.log('📖 Residential: Loading completed form - setting to read-only mode');
+          setIsViewOnly(true);
+          // Don't set isSubmitted here - we want to show the form, not success screen
+          // isSubmitted should only be true immediately after submission
+        }
+        
+        // Check if user has answered questions in draft
+        const hasAnswers = Object.values(loadedData).some(value => 
+          value && value.toString().trim() !== ''
+        );
+        if (hasAnswers) {
+          setHasAnsweredQuestion(true);
+        }
+      }
+    }
+  }, [draftData]);
+
+  // Monitor isSubmitted state changes
+  useEffect(() => {
+    console.log("isSubmitted state changed to:", isSubmitted);
+  }, [isSubmitted]);
+
+  // Add beforeunload handler for auto-save
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (!hasAnsweredQuestion || isViewOnly) {
+        // User hasn't answered any questions or form is view-only, discard the form
+        console.log('🗑️ Residential: Discarding form on unload - no questions answered or view-only');
+        const existingAssessments = JSON.parse(localStorage.getItem('assessments') || '[]');
+        const filteredAssessments = existingAssessments.filter(a => a.id !== assessmentId);
+        localStorage.setItem('assessments', JSON.stringify(filteredAssessments));
+        return;
+      }
+
+      if (hasAnsweredQuestion && !isSubmitted) {
+        console.log('🚨 Residential: beforeunload triggered - saving assessment');
+        
+        const saveData = {
+          id: assessmentId,
+          caseId: formData.contract_number || 'N/A', // Use caseId to match dashboard expectations
+          contract_number: formData.contract_number || 'N/A',
+          provider: formData.provider || 'N/A', 
+          date: formData.date || getCurrentDate(),
+          status: 'In-progress',
+          type: 'Residential',
+          created_on: new Date().toISOString(),
+          created_by: 'Current User', // You may want to get this from auth context
+          submitted_on: null,
+          data: formData
+        };
+        
+        // Save to localStorage
+        const existingAssessments = JSON.parse(localStorage.getItem('assessments') || '[]');
+        const assessmentIndex = existingAssessments.findIndex(a => a.id === assessmentId);
+        
+        if (assessmentIndex !== -1) {
+          existingAssessments[assessmentIndex] = saveData;
+        } else {
+          existingAssessments.push(saveData);
+        }
+        
+        localStorage.setItem('assessments', JSON.stringify(existingAssessments));
+        console.log('💾 Residential: Assessment auto-saved to localStorage', saveData);
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [hasAnsweredQuestion, isSubmitted, assessmentId, formData, isViewOnly]);
 
   const updateField = (name, value) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    // Prevent updates when in view-only mode
+    if (isViewOnly) {
+      return;
+    }
+    
+    const updatedFormData = { ...formData, [name]: value };
+    setFormData(updatedFormData);
+    
+    // Track that user has answered at least one question
+    if (value && value.toString().trim() !== '' && !hasAnsweredQuestion) {
+      const wasFirstAnswer = !hasAnsweredQuestion;
+      setHasAnsweredQuestion(true);
+      
+      // Save to dashboard when first question is answered
+      if (wasFirstAnswer && typeof onSave === 'function') {
+        console.log('🟢 Residential: Saving to dashboard - first question answered');
+        const saveData = {
+          id: assessmentId,
+          caseId: updatedFormData.contract_number || 'N/A', // Use caseId to match dashboard expectations
+          contract_number: updatedFormData.contract_number || 'N/A',
+          provider: updatedFormData.provider || 'N/A', 
+          date: updatedFormData.date || getCurrentDate(),
+          status: 'In-progress',
+          type: 'Residential',
+          created_on: new Date().toISOString(),
+          created_by: 'Current User',
+          submitted_on: null,
+          data: updatedFormData,
+          autoSaved: true // Mark as auto-save so form doesn't close
+        };
+        onSave(saveData);
+      }
+    }
   };
 
   const handleInputChange = (e) => {
+    // Prevent changes when in view-only mode or submitted
+    if (isViewOnly || isSubmitted) {
+      return;
+    }
+    
     const { name, value } = e.target;
 
     if (
@@ -683,6 +847,11 @@ function App() {
   };
 
   const handleScoreChange = (e) => {
+    // Prevent changes when in view-only mode or submitted
+    if (isViewOnly || isSubmitted) {
+      return;
+    }
+    
     const { name, value } = e.target;
     const numeric =
       value === "" || Number.isNaN(Number(value)) ? "" : Number(value);
@@ -697,17 +866,24 @@ function App() {
     updateField(name, value);
   };
 
-  // Prevent mouse wheel from changing number input values
+  // ✅ MERGED: Prevent mouse wheel from changing number input values
   const handleScoreWheel = (e) => {
     e.target.blur(); // Remove focus from the input to prevent scroll change
   };
 
+  // ✅ MERGED: Updated summary score calculation with round-up rule and ALL items check
   const getSummaryScore = (psId) => {
+    // Find the performance standard to get total number of items
+    const ps = performanceStandards.find(p => p.id === psId);
+    if (!ps || !ps.items) return "";
+    
+    const totalItems = ps.items.length;
     let total = 0;
     let count = 0;
 
+    // Count how many items have scores
     Object.entries(formData).forEach(([key, val]) => {
-      if (key.startsWith(`${psId}_item`) && val !== "") {
+      if (key.startsWith(`${psId}_item`) && key.endsWith('_score') && val !== "") {
         const num = Number(val);
         if (!Number.isNaN(num) && num >= 1 && num <= 4) {
           total += num;
@@ -716,13 +892,16 @@ function App() {
       }
     });
 
-    if (!count) return "";
-    return Math.round(total / count);
+    // Only return score if ALL items are scored
+    if (count !== totalItems) return "";
+    
+    // Apply round-up rule: use Math.ceil to always round up
+    return Math.ceil(total / count);
   };
 
   const getCharCount = (name) => (formData[name] || "").length;
 
-  // Get the highest severity score for a performance standard (higher number = higher severity)
+  // ✅ MERGED: CORRECTED severity logic - higher score (3-4) = higher severity
   const getDomainSeverity = (psId) => {
     let highestScore = null; // Higher score = higher severity
 
@@ -740,7 +919,7 @@ function App() {
     return highestScore;
   };
 
-  // Get color class based on severity score
+  // ✅ MERGED: CORRECTED color class based on severity score
   const getDomainColorClass = (psId) => {
     const severity = getDomainSeverity(psId);
     
@@ -752,7 +931,7 @@ function App() {
     return 'domain-green';                           // Low severity (1)
   };
 
-  // Get severity badge text and class
+  // ✅ MERGED: CORRECTED severity badge text and class
   const getSeverityBadge = (psId) => {
     const severity = getDomainSeverity(psId);
     
@@ -763,50 +942,199 @@ function App() {
   };
 
   const handleSaveAsDraft = () => {
-    console.log("Saved as Draft:", formData);
-    alert("Assessment saved as draft successfully!");
-    // Here you would typically save to a database or local storage
-    // You could also close the form or redirect the user
+    if (!hasAnsweredQuestion) {
+      // No questions answered, just close the form without saving
+      console.log('🗑️ Residential: Closing form - no questions answered');
+      if (onClose) {
+        onClose();
+      } else {
+        window.location.href = '/AE_Dashboard/';
+      }
+      return;
+    }
+
+    console.log("Saving as Draft:", formData);
+    
+    const saveData = {
+      id: assessmentId,
+      contract_number: formData.contract_number || 'N/A',
+      provider: formData.provider || 'N/A', 
+      date: formData.date || getCurrentDate(),
+      status: 'In-progress',
+      data: formData
+    };
+
+    if (onSave) {
+      onSave(saveData);
+    }
+
+    // Redirect to dashboard
+    if (onClose) {
+      onClose();
+    } else {
+      window.location.href = '/AE_Dashboard/';
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log("Submit button clicked - checking for errors...");
+    console.log("Score errors:", scoreErrors);
+    console.log("Date error:", dateError);
+
+    // Check score errors
     const hasScoreError = Object.values(scoreErrors).some(Boolean);
     if (hasScoreError) {
+      console.log("Submission blocked by score errors");
       alert("Please fix score errors before submitting.");
       return;
     }
+    
+    // Check date errors
     if (dateError) {
+      console.log("Submission blocked by date errors");
       alert("Please fix date errors before submitting.");
       return;
     }
 
+    // ✅ CUSTOM VALIDATION: Check required fields only on submit
+    const missingFields = [];
+    
+    // Check header required fields
+    if (!formData.date || formData.date.trim() === '') {
+      missingFields.push('Date');
+    }
+    if (!formData.contract_number || formData.contract_number.trim() === '') {
+      missingFields.push('Contract#');
+    }
+    if (!formData.provider || formData.provider.trim() === '') {
+      missingFields.push('Provider');
+    }
+
+    // Check all Performance Standards for required fields
+    performanceStandards.forEach((ps) => {
+      // Check all assessment item scores
+      ps.items.forEach((item, index) => {
+        const itemNum = index + 1;
+        const scoreName = `${ps.id}_item${itemNum}_score`;
+        if (!formData[scoreName] || formData[scoreName] === '') {
+          missingFields.push(`${ps.id.toUpperCase()} - Item ${itemNum} Score`);
+        }
+      });
+
+      // Check SBAR fields (Situation, Background, Assessment, Recommendation)
+      if (!formData[`${ps.id}_situation`] || formData[`${ps.id}_situation`].trim() === '') {
+        missingFields.push(`${ps.id.toUpperCase()} - Situation`);
+      }
+      if (!formData[`${ps.id}_background`] || formData[`${ps.id}_background`].trim() === '') {
+        missingFields.push(`${ps.id.toUpperCase()} - Background`);
+      }
+      if (!formData[`${ps.id}_assessment`] || formData[`${ps.id}_assessment`].trim() === '') {
+        missingFields.push(`${ps.id.toUpperCase()} - Assessment`);
+      }
+      if (!formData[`${ps.id}_recommendation`] || formData[`${ps.id}_recommendation`].trim() === '') {
+        missingFields.push(`${ps.id.toUpperCase()} - Recommendation`);
+      }
+    });
+
+    // If there are missing required fields, show error and stop submission
+    if (missingFields.length > 0) {
+      console.log("Submission blocked - missing required fields:", missingFields);
+      const fieldList = missingFields.slice(0, 5).join('\n• ');
+      const remaining = missingFields.length > 5 ? `\n...and ${missingFields.length - 5} more fields` : '';
+      alert(`Please fill in all required fields:\n\n• ${fieldList}${remaining}`);
+      return;
+    }
+
+    console.log("No validation errors, proceeding with submission...");
     console.log("Assessment Data:", formData);
-    // Show success screen
+    
+    // Save as completed assessment
+    const saveData = {
+      id: assessmentId,
+      contract_number: formData.contract_number || 'N/A',
+      provider: formData.provider || 'N/A', 
+      date: formData.date || getCurrentDate(),
+      status: 'Completed', // Set status to completed on submit
+      data: formData,
+      autoSaved: true // Mark as auto-save so form doesn't close (will show success screen instead)
+    };
+
+    console.log("Calling onSave with:", saveData);
+    if (onSave) {
+      onSave(saveData);
+    }
+    
+    console.log("About to show success screen...");
+    // Show success screen and make form read-only immediately
+    setShowSuccessScreen(true); // Show success screen immediately after submission
     setIsSubmitted(true);
+    setIsViewOnly(true); // Make form read-only immediately after submission
+    console.log("Success screen will be shown, form is now read-only");
     // Scroll to top to show the success message
     window.scrollTo(0, 0);
   };
 
   const handleReturnToDashboard = () => {
-    // TODO: Later implement navigation to dashboard
     console.log("Returning to dashboard...");
-    // For now, just reset the form
-    // When you have routing set up, you would navigate here
-    // Example: navigate('/dashboard') or window.location.href = '/dashboard'
+    
+    // Auto-save if user has answered questions but hasn't submitted
+    if (hasAnsweredQuestion && !isSubmitted) {
+      console.log('💾 Residential: Auto-saving before returning to dashboard');
+      
+      const saveData = {
+        id: assessmentId,
+        caseId: formData.contract_number || 'N/A', // Use caseId to match dashboard expectations
+        contract_number: formData.contract_number || 'N/A',
+        provider: formData.provider || 'N/A', 
+        date: formData.date || getCurrentDate(),
+        status: 'In-progress',
+        type: 'Residential',
+        created_on: new Date().toISOString(),
+        created_by: 'Current User', // You may want to get this from auth context
+        submitted_on: null,
+        data: formData
+      };
+      
+      // Save to localStorage
+      const existingAssessments = JSON.parse(localStorage.getItem('assessments') || '[]');
+      const assessmentIndex = existingAssessments.findIndex(a => a.id === assessmentId);
+      
+      if (assessmentIndex !== -1) {
+        existingAssessments[assessmentIndex] = saveData;
+      } else {
+        existingAssessments.push(saveData);
+      }
+      
+      localStorage.setItem('assessments', JSON.stringify(existingAssessments));
+      console.log('✅ Residential: Assessment auto-saved before dashboard return');
+      
+      // Also call onSave if available
+      if (onSave) {
+        onSave(saveData);
+      }
+    }
+    
+    // Close the form and return to dashboard
+    if (onClose) {
+      onClose();
+    } else {
+      window.location.href = '/AE_Dashboard/';
+    }
   };
 
   return (
     <div className="container">
-      {isSubmitted ? (
-        // Success Screen
+      {console.log("Current showSuccessScreen state:", showSuccessScreen, "isViewOnly:", isViewOnly)} {/* Debug log */}
+      {showSuccessScreen ? (
+        // Success Screen - only shown immediately after submission
         <div className="success-screen">
           <div className="success-icon">✓</div>
           <h1 className="success-title">Thank You!</h1>
           <p className="success-message">Successfully Saved</p>
           <p className="success-submessage">
-            Your Performance Standard Report has been submitted successfully.
+            Your Residential Form has been submitted successfully.
           </p>
           <button 
             className="btn-dashboard" 
@@ -829,6 +1157,21 @@ function App() {
           <div className="header-titles">
             <h1>Residential Contract</h1>
             <h2>Performance Monitoring</h2>
+            {isViewOnly && (
+              <div style={{
+                color: '#e74c3c',
+                fontWeight: 'bold',
+                fontSize: '14px',
+                marginTop: '5px',
+                padding: '5px 10px',
+                backgroundColor: '#f8d7da',
+                border: '1px solid #f5c6cb',
+                borderRadius: '4px',
+                display: 'inline-block'
+              }}>
+                📋 READ-ONLY MODE - COMPLETED FORM
+              </div>
+            )}
           </div>
         </div>
         <div className="header-right">
@@ -847,7 +1190,7 @@ function App() {
               className="info-input"
               value={formData.date || ""}
               onChange={handleInputChange}
-              required
+              disabled={isSubmitted || isViewOnly}
             />
 
             <label className="info-label">Contract#:</label>
@@ -857,7 +1200,7 @@ function App() {
               className="info-input"
               value={formData.contract_number || ""}
               onChange={handleInputChange}
-              required
+              disabled={isSubmitted || isViewOnly}
             />
 
             <label className="info-label">Provider:</label>
@@ -868,7 +1211,7 @@ function App() {
               style={{ gridColumn: "span 3" }}
               value={formData.provider || ""}
               onChange={handleInputChange}
-              required
+              disabled={isSubmitted || isViewOnly}
             />
           </div>
 
@@ -881,6 +1224,7 @@ function App() {
               style={{ width: "60px" }}
               value={formData.region || ""}
               onChange={handleInputChange}
+              disabled={isSubmitted || isViewOnly}
             />
 
             <label className="info-label">Address:</label>
@@ -891,6 +1235,7 @@ function App() {
               style={{ gridColumn: "span 5" }}
               value={formData.address || ""}
               onChange={handleInputChange}
+              disabled={isSubmitted || isViewOnly}
             />
           </div>
 
@@ -901,8 +1246,10 @@ function App() {
               name="capacity"
               className="info-input"
               style={{ width: "80px" }}
+              min="1"
               value={formData.capacity || ""}
               onChange={handleInputChange}
+              disabled={isSubmitted || isViewOnly}
             />
 
             <label className="info-label">Census:</label>
@@ -911,8 +1258,10 @@ function App() {
               name="census"
               className="info-input"
               style={{ width: "80px" }}
+              min="1"
               value={formData.census || ""}
               onChange={handleInputChange}
+              disabled={isSubmitted || isViewOnly}
             />
 
             <label className="info-label">Rebuttal Expiration Date:</label>
@@ -932,6 +1281,7 @@ function App() {
               className="info-input"
               value={formData.units || ""}
               onChange={handleInputChange}
+              disabled={isSubmitted || isViewOnly}
             />
           </div>
 
@@ -943,6 +1293,7 @@ function App() {
               className="info-input"
               value={formData.monitor || ""}
               onChange={handleInputChange}
+              disabled={isSubmitted || isViewOnly}
             />
 
             <label className="info-label">Submitted Date:</label>
@@ -952,6 +1303,7 @@ function App() {
               className="info-input"
               value={formData.submitted_date || ""}
               onChange={handleInputChange}
+              disabled={isSubmitted || isViewOnly}
             />
 
             <label className="info-label">Monitoring Supervisor:</label>
@@ -961,6 +1313,7 @@ function App() {
               className="info-input"
               value={formData.monitoring_supervisor || ""}
               onChange={handleInputChange}
+              disabled={isSubmitted || isViewOnly}
             />
 
             <label className="info-label">Approved Date:</label>
@@ -970,6 +1323,7 @@ function App() {
               className="info-input"
               value={formData.approved_date || ""}
               onChange={handleInputChange}
+              disabled={isSubmitted || isViewOnly}
             />
           </div>
 
@@ -988,6 +1342,7 @@ function App() {
               className="info-input"
               value={formData.rebuttal_date || ""}
               onChange={handleInputChange}
+              disabled={isSubmitted || isViewOnly}
             />
           </div>
 
@@ -998,6 +1353,7 @@ function App() {
               className="info-input"
               value={formData.monitoring_level || ""}
               onChange={handleInputChange}
+              disabled={isSubmitted || isViewOnly}
             >
               <option value="">Select Level</option>
               <option value="Green">Green Level</option>
@@ -1005,15 +1361,23 @@ function App() {
               <option value="Red">Red Level</option>
             </select>
 
+            {/* ✅ MERGED: Monitoring Level Status as dropdown */}
             <label className="info-label">Monitoring Level Status:</label>
-            <input
-              type="text"
+            <select
               name="monitoring_level_status"
               className="info-input"
               style={{ gridColumn: "span 3" }}
               value={formData.monitoring_level_status || ""}
               onChange={handleInputChange}
-            />
+              disabled={isSubmitted || isViewOnly}
+            >
+              <option value="" disabled>Select Status</option>
+              <option value="Started">Started</option>
+              <option value="Supervisory Review">Supervisory Review</option>
+              <option value="Sent to Agency/Provider">Sent to Agency/Provider</option>
+              <option value="Completed">Completed</option>
+              <option value="Locked (Supervisor approval)">Locked (Supervisor approval)</option>
+            </select>
 
             <label className="info-label">Score:</label>
             <input
@@ -1025,6 +1389,7 @@ function App() {
               max="5"
               value={formData.overall_score || ""}
               onChange={handleInputChange}
+              disabled={isSubmitted || isViewOnly}
             />
           </div>
 
@@ -1041,6 +1406,7 @@ function App() {
             maxLength={4000}
             value={formData.header_comment || ""}
             onChange={handleInputChange}
+            disabled={isSubmitted || isViewOnly}
           />
         </div>
 
@@ -1065,6 +1431,7 @@ function App() {
                     className="summary-input"
                     value={formData[`${ps.id}_intervention`] || ""}
                     onChange={handleInputChange}
+                    disabled={isSubmitted || isViewOnly}
                   />
                 </td>
                 <td>
@@ -1080,7 +1447,7 @@ function App() {
           </tbody>
         </table>
 
-        {/* Scoring Scale */}
+        {/* ✅ MERGED: Updated Scoring Scale with correct definitions */}
         <div className="scoring-scale">
           <strong>Scoring Scale:</strong> Each Assessment Item requires a numeric
           score using a 4-point Likert scale:
@@ -1245,6 +1612,7 @@ function App() {
                     />
 
                     <div className="score-row">
+                      {/* ✅ MERGED: Added required class back */}
                       <label className="required">
                         Assessment Item Score (1-4):
                       </label>
@@ -1257,7 +1625,7 @@ function App() {
                         value={formData[scoreName] || ""}
                         onChange={handleScoreChange}
                         onWheel={handleScoreWheel}
-                        required
+                        disabled={isSubmitted || isViewOnly}
                       />
                       {scoreErrors[scoreName] && (
                         <span className="validation-error">
@@ -1273,6 +1641,7 @@ function App() {
                         maxLength={4000}
                         value={formData[commentName] || ""}
                         onChange={handleInputChange}
+                        disabled={isSubmitted || isViewOnly}
                       />
                       <div className="char-counter">
                         <span className="count">
@@ -1289,6 +1658,7 @@ function App() {
                         maxLength={4000}
                         value={formData[rebuttalName] || ""}
                         onChange={handleInputChange}
+                        disabled={isSubmitted || isViewOnly}
                       />
                       <div className="char-counter">
                         <span className="count">
@@ -1313,6 +1683,7 @@ function App() {
                 </h3>
 
                 <div className="text-field">
+                  {/* ✅ MERGED: Added required class back */}
                   <label className="required">Situation:</label>
                   <div className="instruction">
                     *Briefly describe the current situation or issue that needs to be addressed
@@ -1320,9 +1691,9 @@ function App() {
                   <textarea
                     name={`${ps.id}_situation`}
                     maxLength={4000}
-                    required
                     value={formData[`${ps.id}_situation`] || ""}
                     onChange={handleInputChange}
+                    disabled={isSubmitted || isViewOnly}
                   />
                   <div className="char-counter">
                     <span className="count">
@@ -1333,6 +1704,7 @@ function App() {
                 </div>
 
                 <div className="text-field">
+                  {/* ✅ MERGED: Added required class back */}
                   <label className="required">Background:</label>
                   <div className="instruction">
                     *Clearly provide relevant background information that provides context for the situation, including any important details or previous actions taken
@@ -1340,9 +1712,9 @@ function App() {
                   <textarea
                     name={`${ps.id}_background`}
                     maxLength={4000}
-                    required
                     value={formData[`${ps.id}_background`] || ""}
                     onChange={handleInputChange}
+                    disabled={isSubmitted || isViewOnly}
                   />
                   <div className="char-counter">
                     <span className="count">
@@ -1353,6 +1725,7 @@ function App() {
                 </div>
 
                 <div className="text-field">
+                  {/* ✅ MERGED: Added required class back */}
                   <label className="required">Assessment:</label>
                   <div className="instruction">
                     *State one's professional analysis and/or interpretation of the situation noting the potential impact and/or implications
@@ -1360,9 +1733,9 @@ function App() {
                   <textarea
                     name={`${ps.id}_assessment`}
                     maxLength={4000}
-                    required
                     value={formData[`${ps.id}_assessment`] || ""}
                     onChange={handleInputChange}
+                    disabled={isSubmitted || isViewOnly}
                   />
                   <div className="char-counter">
                     <span className="count">
@@ -1373,6 +1746,7 @@ function App() {
                 </div>
 
                 <div className="text-field">
+                  {/* ✅ MERGED: Added required class back */}
                   <label className="required">Recommendation:</label>
                   <div className="instruction">
                     *Note the proposal course of action and/or solution to address the situation based off the assessment
@@ -1380,9 +1754,9 @@ function App() {
                   <textarea
                     name={`${ps.id}_recommendation`}
                     maxLength={4000}
-                    required
                     value={formData[`${ps.id}_recommendation`] || ""}
                     onChange={handleInputChange}
+                    disabled={isSubmitted || isViewOnly}
                   />
                   <div className="char-counter">
                     <span className="count">
@@ -1402,10 +1776,15 @@ function App() {
             type="button" 
             className="btn-draft"
             onClick={handleSaveAsDraft}
+            disabled={isSubmitted || isViewOnly}
           >
-            Save as Draft and Close
+            Save as Draft and Close Form
           </button>
-          <button type="submit" className="btn-submit">
+          <button 
+            type="submit" 
+            className="btn-submit"
+            disabled={isSubmitted || isViewOnly}
+          >
             Submit
           </button>
         </div>
