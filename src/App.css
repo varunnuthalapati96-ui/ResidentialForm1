@@ -172,7 +172,7 @@ body {
   background-color: #f9f9f9;
 }
 
-/* Remove spinner arrows from summary score */
+/* ✅ ADDED: Remove spinner arrows from summary score */
 .summary-score::-webkit-outer-spin-button,
 .summary-score::-webkit-inner-spin-button {
   -webkit-appearance: none;
